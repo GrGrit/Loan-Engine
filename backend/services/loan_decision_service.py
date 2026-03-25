@@ -1,4 +1,4 @@
-from credit_modifier_service import get_credit_modifier
+from services.credit_modifier_service import get_credit_modifier
 
 # For money
 MIN_AMOUNT = 2000
