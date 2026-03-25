@@ -8,7 +8,11 @@ MIN_PERIOD = 12
 MAX_PERIOD = 60
 
 def calculate_decision(personal_code, loan_amount, loan_period):
-    """Returns the maximum approvable loan amount and period for the given personal code."""
+    """
+    Returns the maximum approvable loan amount and period for the given personal code.
+    Paramater loan_amount is actually never used in coding because it does not affect the algorithm output.
+    Just simple if checks to determine when to call find_best_offer and try_longer_period methods.
+    """
     modifier = get_credit_modifier(personal_code)
     if modifier == -1:
         return False, None, None, "Unknown personal code."
@@ -28,7 +32,7 @@ def calculate_decision(personal_code, loan_amount, loan_period):
     if approved_amount >= loan_amount:
         return True, approved_amount, approved_period, f"Requested {loan_amount}€. Approved up to {approved_amount}€."
     else:
-        return True, approved_amount, approved_period, f"Requested {loan_amount}€, but maximum approved amount is {approved_amount}€."
+        return True, approved_amount, approved_period, f"Requested {loan_amount}€, but maximum approvable amount is {approved_amount}€."
 
 
 def find_best_offer(modifier, period):
@@ -41,7 +45,9 @@ def find_best_offer(modifier, period):
 
 
 def try_longer_period(modifier, current_period):
-    """Finds the period beyond current_period."""
+    """
+    Finds the period that fits with the biggest amount of a loan.
+    """
     best_amount, best_period = None, None
     for period in range(current_period + 1, MAX_PERIOD + 1):
         amount, _ = find_best_offer(modifier, period)

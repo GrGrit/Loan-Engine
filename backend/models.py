@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 
-"""Small class. Shows how data should look like."""
+"""Shows how data should look like."""
 class LoanRequest(BaseModel):
     personal_code: str
     loan_amount: float = Field(ge=2000, le=10000)
